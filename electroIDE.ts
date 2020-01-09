@@ -18,7 +18,7 @@ canvas.addEventListener("mousemove", (e) => {
 	}
 });
 
-function loop(){
+const loop = () =>{
 	//background
 	ctx.fillStyle = "white";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -38,16 +38,16 @@ function loop(){
 window.requestAnimationFrame(loop);
 
 //helperfunctions
-function line(x1, y1, x2, y2){
+const line = (x1:number, y1:number, x2:number, y2:number) => {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
 	ctx.lineTo(x2, y2);
 	ctx.stroke();
 }
 
-document.body.onmousedown = function() { 
+document.body.onmousedown = () => { 
   mouseDown = true;
 }
-document.body.onmouseup = function() {
+document.body.onmouseup = () => {
   mouseDown = false;
 }
