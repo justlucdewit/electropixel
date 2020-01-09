@@ -12,6 +12,19 @@ let posY = 0;
 //globalconstants
 const TILESIZE = 30;
 
+window.addEventListener("keydown", (e) => {
+	console.log(e)
+	if (e.keyCode == 65){
+		posX+=5;
+	}else if (e.keyCode == 68){
+		posX-=5;
+	}else if (e.keyCode == 87){
+		posY+=5;
+	}else if (e.keyCode == 83){
+		posY-=5;
+	}
+});
+
 canvas.addEventListener("mousemove", (e) => {
 	if (mouseDown){
 		console.log(e.clientX);
@@ -24,11 +37,11 @@ const loop = () =>{
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.strokeStyle = "black";
 	
-	for (let x = 0; x < canvas.width; x += TILESIZE){
+	for (let x = posX; x < canvas.width+posX; x += TILESIZE){
 		line(x, 0, x, canvas.height);
 	}
 	
-	for (let y = 0; y < canvas.height; y += TILESIZE){
+	for (let y = posY; y < canvas.height+posY; y += TILESIZE){
 		line(0, y, canvas.width, y);
 	}
 	
