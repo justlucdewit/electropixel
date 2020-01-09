@@ -1,0 +1,21 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+#toolbar{
+	height: 10%;
+	background-color: #021560;
+	color: white;
+}
+
+#statusbar{
+	float: bottom;
+	height: 10%;
+	background-color: #021560;
+}
+
+#world{
+	height: 80vh;
+	width: 100vw;
+}
