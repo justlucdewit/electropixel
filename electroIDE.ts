@@ -8,20 +8,22 @@ const ctx = canvas.getContext("2d");
 let mouseDown = false
 let posX = 0;
 let posY = 0;
+let keyState = {};
 
 //globalconstants
 const TILESIZE = 30;
+ 
+window.addEventListener('keydown',function(e){
+    keyState[e.keyCode || e.which] = true;
+},true);    
+window.addEventListener('keyup',function(e){
+    keyState[e.keyCode || e.which] = false;
+},true);
 
 window.addEventListener("keydown", (e) => {
 	console.log(e)
 	if (e.keyCode == 65){
 		posX+=5;
-	}else if (e.keyCode == 68){
-		posX-=5;
-	}else if (e.keyCode == 87){
-		posY+=5;
-	}else if (e.keyCode == 83){
-		posY-=5;
 	}
 });
 
@@ -37,12 +39,26 @@ const loop = () =>{
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
 	ctx.strokeStyle = "black";
 	
+	//draw lines
 	for (let x = posX; x < canvas.width+posX; x += TILESIZE){
 		line(x, 0, x, canvas.height);
 	}
 	
 	for (let y = posY; y < canvas.height+posY; y += TILESIZE){
 		line(0, y, canvas.width, y);
+	}
+	
+	//key input
+	if (keyState[65]){
+		posX+=5;
+	}else if (keyState[68]){
+		posX-=5;
+	}
+	
+	if (keyState[87]){
+		posY+=5;
+	}else if (keyState[83]){
+		posY-=5;
 	}
 	
 	window.requestAnimationFrame(loop);
