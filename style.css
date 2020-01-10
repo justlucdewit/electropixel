@@ -1,12 +1,12 @@
 *{
 	padding: 0px;
 	margin: 0px;
+	color: white;
 }
 
 #toolbar{
 	height: 10%;
 	background-color: #021560;
-	color: white;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: flex-start;
@@ -16,6 +16,7 @@
 	float: bottom;
 	height: 10%;
 	background-color: #021560;
+	font-size: 30px;
 }
 
 #world{

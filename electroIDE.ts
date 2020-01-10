@@ -1,17 +1,31 @@
 //get elements
 const canvas = document.getElementById("world") as HTMLCanvasElement;
+const statbar = document.getElementById("statusbar") as HTMLElement;
+
 canvas.width = window.innerWidth;
 canvas.height = 0.8*window.innerHeight;
 const ctx = canvas.getContext("2d");
+
+
+
+//globalconstants
+const TILESIZE = 30;
+const FASTMOVESPEED = 10;
+const SLOWMOVESPEED = 5;
+enum component{
+	empty,
+	wire,
+	button,
+	lamp
+}
 
 //nonconstants
 let mouseDown = false
 let posX = 0;
 let posY = 0;
+let tool = component.wire;
 let keyState = {};
-
-//globalconstants
-const TILESIZE = 30;
+let lasttool = "";
  
 window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
@@ -26,11 +40,16 @@ window.addEventListener("keydown", (e) => {
 	}
 });
 
-canvas.addEventListener("mousemove", (e) => {
-	if (mouseDown){
-		console.log(e.clientX);
+const handledraw = (e) => {
+	if (e.buttons !== 0 || keyState[70]){
+		const x = ((e.clientX/TILESIZE)-posX/TILESIZE)|0;
+		const y = ((e.clientY-canvas.getClientRects()[0].y)/TILESIZE)|0;
+		
+		lasttool = `drawn ${component[tool]} at ${x}, ${y}`
 	}
-});
+}
+
+canvas.addEventListener("mousemove", handledraw);
 
 const loop = () =>{
 	//background
@@ -49,24 +68,34 @@ const loop = () =>{
 	}
 	
 	//key input
+	let realmovespeed = FASTMOVESPEED
+	if (keyState[16]){
+		let realmovespeed = FASTMOVESPEED
+	}
 	if (keyState[65]){
-		posX+=5;
+		posX+=realmovespeed;
 	}else if (keyState[68]){
-		posX-=5;
+		posX-=realmovespeed;
 	}
-	
 	if (keyState[87]){
-		posY+=5;
+		posY+=realmovespeed;
 	}else if (keyState[83]){
-		posY-=5;
+		posY-=realmovespeed;
+		handledraw({buttons:1})
 	}
-	
 	window.requestAnimationFrame(loop);
+	
+	//update status bar
+	setStatus();
 }
 
 window.requestAnimationFrame(loop);
 
 //helperfunctions
+function setStatus(){
+	statbar.innerText = `camera at x = ${(-posX/TILESIZE)|0}, y = ${(posY/TILESIZE)|0}\n${lasttool}`;
+}
+
 const line = (x1:number, y1:number, x2:number, y2:number) => {
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
