@@ -21,7 +21,6 @@ window.addEventListener('keyup',function(e){
 },true);
 
 window.addEventListener("keydown", (e) => {
-	console.log(e)
 	if (e.keyCode == 65){
 		posX+=5;
 	}
@@ -40,12 +39,13 @@ const loop = () =>{
 	ctx.strokeStyle = "black";
 	
 	//draw lines
-	for (let x = posX; x < canvas.width+posX; x += TILESIZE){
-		line(x, 0, x, canvas.height);
+
+	for (let x = 0; x < canvas.width; x += TILESIZE){
+		line(x+(posX%TILESIZE), 0, x+(posX%TILESIZE), canvas.height);
 	}
 	
-	for (let y = posY; y < canvas.height+posY; y += TILESIZE){
-		line(0, y, canvas.width, y);
+	for (let y = 0; y < canvas.height; y += TILESIZE){
+		line(0, y+(posY%TILESIZE), canvas.width, y+(posY%TILESIZE));
 	}
 	
 	//key input

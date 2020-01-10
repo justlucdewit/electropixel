@@ -17,7 +17,6 @@ window.addEventListener('keyup', function (e) {
     keyState[e.keyCode || e.which] = false;
 }, true);
 window.addEventListener("keydown", function (e) {
-    console.log(e);
     if (e.keyCode == 65) {
         posX += 5;
     }
@@ -33,11 +32,11 @@ var loop = function () {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "black";
     //draw lines
-    for (var x = posX; x < canvas.width + posX; x += TILESIZE) {
-        line(x, 0, x, canvas.height);
+    for (var x = 0; x < canvas.width; x += TILESIZE) {
+        line(x + (posX % TILESIZE), 0, x + (posX % TILESIZE), canvas.height);
     }
-    for (var y = posY; y < canvas.height + posY; y += TILESIZE) {
-        line(0, y, canvas.width, y);
+    for (var y = 0; y < canvas.height; y += TILESIZE) {
+        line(0, y + (posY % TILESIZE), canvas.width, y + (posY % TILESIZE));
     }
     //key input
     if (keyState[65]) {
