@@ -24,6 +24,11 @@ let posY = 0;
 let tool = component.wire;
 let keyState = {};
 let lasttool = "";
+let world = [
+	[components.wire, components.empty, components.empty],
+	[components.wire, components.wire, components.wire],
+	[components.empty, components.empty, components.wire]
+];
  
 window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
@@ -85,6 +90,17 @@ const loop = () =>{
 	
 	//update status bar
 	setStatus();
+	
+	//draw world cercuit
+	for (const row in world){
+		for (const cell in row){
+			if (cell == component.wire){
+				
+			}else{
+				
+			}
+		}
+	}
 }
 
 window.requestAnimationFrame(loop);

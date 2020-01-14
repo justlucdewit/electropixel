@@ -22,6 +22,11 @@ var posY = 0;
 var tool = component.wire;
 var keyState = {};
 var lasttool = "";
+var world = [
+    [components.wire, components.empty, components.empty],
+    [components.wire, components.wire, components.wire],
+    [components.empty, components.empty, components.wire]
+];
 window.addEventListener('keydown', function (e) {
     keyState[e.keyCode || e.which] = true;
 }, true);
@@ -74,6 +79,15 @@ var loop = function () {
     window.requestAnimationFrame(loop);
     //update status bar
     setStatus();
+    //draw world cercuit
+    for (var row in world) {
+        for (var cell in row) {
+            if (cell == component.wire) {
+            }
+            else {
+            }
+        }
+    }
 };
 window.requestAnimationFrame(loop);
 //helperfunctions
