@@ -23,9 +23,9 @@ var tool = component.wire;
 var keyState = {};
 var lasttool = "";
 var world = [
-    [components.wire, components.empty, components.empty],
-    [components.wire, components.wire, components.wire],
-    [components.empty, components.empty, components.wire]
+    [component.wire, component.empty, component.empty],
+    [component.wire, component.wire, component.wire],
+    [component.empty, component.empty, component.wire]
 ];
 window.addEventListener('keydown', function (e) {
     keyState[e.keyCode || e.which] = true;
